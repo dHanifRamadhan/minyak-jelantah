@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/users', 'UsersController@Index');
+$router->post('/users/store/{role}', 'UsersController@Store');
+$router->get('/users/edit/{id}', 'UsersController@Edit');
+$router->put('/users/{id}', 'UsersController@Update');
+$router->delete('/users/{id}', 'UsersController@Destroy');
