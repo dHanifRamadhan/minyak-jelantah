@@ -3,20 +3,17 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class CheckRole
-{
-    public function handle(Request $request, Closure $next, ...$roles)
-    {
-        if (Auth::check() && in_array(Auth::users()->role, $roles))
-        {
+class CheckRole {
+    public function handle($request, Closure $next, $role) {
+        $users = DB::table('users')->where('email', $request->user()->email)->first();
+        if ($users && $users->role === $role) {
             return $next($request);
         }
         return response()->json([
             'code' => 403,
-            'message' => 'Hak akses tidak di izinkan'
+            'message' => 'Unauthorized'
         ], 403);
     }
 }

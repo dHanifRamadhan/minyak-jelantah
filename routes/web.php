@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\usersController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,8 +19,9 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/users', 'UsersController@Index');
-$router->post('/users/store/{role}', 'UsersController@Store');
-$router->get('/users/edit/{id}', 'UsersController@Edit');
-$router->put('/users/{id}', 'UsersController@Update');
-$router->delete('/users/{id}', 'UsersController@Destroy');
+// $router->group(['middleware' => 'role:admin'], function ($router) {
+    $router->get('/users', 'usersController@Index');
+    $router->post('users/create/{role}', 'usersController@create');
+    $router->get('users/show/{id}', 'usersController@show');
+    $router->get('users/update/{id}', 'usersController@update');
+// });

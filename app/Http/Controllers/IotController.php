@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-class IotController extends Controller 
+use Illuminate\Http\Request;
+use PhpMqtt\Client\Facades\MQTT;
+use Illuminate\Support\Facades\Log;
+
+class iotController extends Controller
 {
-    public function reciveMesaage()
+
+    public function sendMessage(Request $request)
     {
         
     }
